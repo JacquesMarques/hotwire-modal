@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :ensure_frame_response, only: [:new, :edit]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
@@ -59,5 +60,10 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :body)
+    end
+
+    def ensure_frame_response
+      return unless Rails.env.development?
+      redirect_to root_path unless turbo_frame_request?
     end
 end
