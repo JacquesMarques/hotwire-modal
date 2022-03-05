@@ -32,7 +32,7 @@ export default class extends Controller {
   // action: "click@window->turbo-modal#closeBackground"
   closeBackground(e) {
     if (e && this.modalTarget.contains(e.target)) {
-      return
+      return;
     }
     this.hideModal()
   }
